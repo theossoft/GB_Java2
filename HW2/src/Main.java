@@ -16,17 +16,13 @@ import java.util.Arrays;
 
 public class Main {
 
-    public static void fourAndFourArray(String[][] strings) throws MyArraySizeException {
+    public static void fourAndFourArray(String[][] strings) throws MyArraySizeException, MyArrayDataException {
         System.out.println(Arrays.deepToString(strings));
         int sum = 0;
         for (int i = 0; i < strings.length; i++) {
             for (int j = 0; j < strings[i].length; j++) {
                 int number = 0;
-                try {
                     number = Integer.parseInt(strings[i][j]);
-                } catch (MyArrayDataException e) {
-                    e.printStackTrace();
-                }
                 sum = sum + number;
             }
         }
@@ -34,13 +30,25 @@ public class Main {
         System.out.println("Сумма чисел массива = " + sum);
     }
 
-    public static void main(String[] args) throws MyArraySizeException {
+    public static void main(String[] args) {
         String[][] strGood = {{"1", "2", "3", "4"},{"1", "2", "3", "4"},{"1", "2", "3", "4"},{"1", "2", "3", "4"}};
         String[][] strWorse = {{"1", "2", "3"},{"1", "2", "3"},{"1", "2", "3"},{"1", "2", "3"}};
-        String[][] strBad = {{"1", "2", "3", "4"},{"1", "2", "3", "4"},{"1", "2", "3", "4"}};
+        String[][] strBad = {{"a", "2", "3", "4"},{"1", "2", "3", "4"},{"1", "2", "3", "4"}};
 
-        fourAndFourArray(strGood);
-        fourAndFourArray(strWorse);
-        fourAndFourArray(strBad);
+        try {
+            fourAndFourArray(strGood);
+        } catch (MyArraySizeException e) {
+            e.printStackTrace();
+        }
+        try {
+            fourAndFourArray(strWorse);
+        } catch (MyArraySizeException e) {
+            e.printStackTrace();
+        }
+        try {
+            fourAndFourArray(strBad);
+        } catch (MyArraySizeException e) {
+            e.printStackTrace();
+        }
     }
 }
